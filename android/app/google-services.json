@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "44469445106",
+    "firebase_url": "https://smartcase-5752e.firebaseio.com",
+    "project_id": "smartcase-5752e",
+    "storage_bucket": "smartcase-5752e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44469445106:android:fa7a33fbb6acf8394f0b6b",
+        "android_client_info": {
+          "package_name": "com.example.smartcaseflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "44469445106-7j29pkgesa7lr3t2mb3pp5u8l127g776.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7pABJtWrKjvGqs8sdElqYa_-Kr9MBCOw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "44469445106-7j29pkgesa7lr3t2mb3pp5u8l127g776.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "44469445106-9g4rlolia58ucd6hnns45kruipioaqvq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "fr.esgi.smartcaseflutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
