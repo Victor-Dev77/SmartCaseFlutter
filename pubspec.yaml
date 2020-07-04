@@ -26,11 +26,12 @@ dependencies:
 
 
   get: ^2.13.0
-  esptouch_flutter: ^0.2.2+1
   mqtt_client: ^7.2.1
   wifi: ^0.1.5
   wifi_connector: ^1.0.2
 
+  signal_strength_indicator: ^0.3.0+1
+  font_awesome_flutter: ^8.8.1
 
 
   # Firebase
