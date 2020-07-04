@@ -27,7 +27,7 @@ class AuthController extends GetController {
         Get.toNamed(Router.homeRoute);
       }
     } catch (err) {
-      print("ERROR: AuthController: signin()");
+      print("ERROR: AuthController: signin() - $err");
     }
   }
 
@@ -41,7 +41,7 @@ class AuthController extends GetController {
         Get.toNamed(Router.homeRoute);
       }
     } catch (err) {
-      print("ERROR: AuthController: signUp()");
+      print("ERROR: AuthController: signUp() - $err");
     }
   }
 

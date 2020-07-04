@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
+// TAJ: 5ae8f88e13c14cc1b990bcae08a71bc2
+// VICTOR: a041fdaa48d64d6694d93b469490733d
+
 final client = MqttServerClient.withPort('2.tcp.ngrok.io', '5ae8f88e13c14cc1b990bcae08a71bc2', 11456);
 
 Future<void> mqttMain() async {
@@ -21,13 +24,16 @@ Future<void> mqttMain() async {
 
   /// If you intend to use a keep alive value in your connect message that is not the default(60s)
   /// you must set it here
-  client.keepAlivePeriod = 5;
+  client.keepAlivePeriod = 20;
 
   /// Set auto reconnect
   client.autoReconnect = true;
 
   /// Add the unsolicited auto reconnect callback
   client.onAutoReconnect = onAutoReconnect;
+
+  /// Add the unsolicited disconnection callback
+  client.onDisconnected = onDisconnected;
 
   /// Add the successful connection callback
   client.onConnected = onConnected;
@@ -41,18 +47,18 @@ Future<void> mqttMain() async {
 
   /// Set a ping received callback if needed, called whenever a ping response(pong) is received
   /// from the broker.
-  client.pongCallback = pong;
+  //client.pongCallback = pong;
 
   /// Create a connection message to use or use the default one. The default one sets the
   /// client identifier, any supplied username/password, the default keepalive interval(60s)
   /// and clean session, an example of a specific one below.
   final connMess = MqttConnectMessage()
       .withClientIdentifier('5ae8f88e13c14cc1b990bcae08a71bc2')
-      .keepAliveFor(5) // Must agree with the keep alive set above or not set
-      .withWillTopic('willtopic') // If you set this you must set a will message
-      .withWillMessage('My Will message')
+      .keepAliveFor(20) // Must agree with the keep alive set above or not set
+      .withWillTopic('wifi/death') // If you set this you must set a will message
+      .withWillMessage('Je suis mort FLUTTER')
       .startClean() // Non persistent session for testing
-      .withWillQos(MqttQos.atLeastOnce);
+      .withWillQos(MqttQos.atMostOnce);
   print('EXAMPLE::Mosquitto client connecting....');
   client.connectionMessage = connMess;
 
@@ -74,7 +80,8 @@ Future<void> mqttMain() async {
     print(
         'EXAMPLE::ERROR Mosquitto client connection failed - disconnecting, status is ${client.connectionStatus}');
     client.disconnect();
-    exit(-1);
+    print("DECONNECTE STATUS");
+    //exit(-1);
   }
 
   /// Ok, lets try a subscription
@@ -117,7 +124,18 @@ void onConnected() {
       'EXAMPLE::OnConnected client callback - Client connection was sucessful');
 }
 
-/// Pong callback
-void pong() {
-  print('EXAMPLE::Ping response client callback invoked - you may want to disconnect your broker here');
+/// The unsolicited disconnect callback
+void onDisconnected() {
+  print('EXAMPLE::OnDisconnected client callback - Client disconnection - ${client.connectionStatus}');
+  if (client.connectionStatus.disconnectionOrigin ==
+      MqttDisconnectionOrigin.solicited) {
+    print('EXAMPLE::OnDisconnected callback is solicited, this is correct');
+  }
+  //exit(-1);
+  print("DECONNECTER");
 }
+
+/// Pong callback
+/*void pong() {
+  print('EXAMPLE::Ping response client callback invoked - you may want to disconnect your broker here');
+}*/

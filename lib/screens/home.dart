@@ -6,51 +6,48 @@ import 'package:smartcaseflutter/mqtt/mqtt_client.dart';
 import 'package:wifi/wifi.dart';
 import 'package:wifi_connector/wifi_connector.dart';
 
-
-final server = "0.tcp.ngrok.io";
-final clientId = "fbc0dccd3aaa47a0b775dbff28ff3638";
-final port = 13719;
-final client = MqttServerClient.withPort(server, clientId, port);
-
 final ssid = "SmartCase";
 final password = "SmartCase";
 
 class Home extends StatelessWidget {
-
- Future<Null> connection() async {
-    await WifiConnector.connectToWifi(ssid: "SmartCase", password: "SmartCase");
+  Future<Null> connection() async {
+    var res = await WifiConnector.connectToWifi(
+        ssid: "SmartCase", password: "SmartCase");
+        print("Connexion wifi: $res");
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-          child: Column(children: <Widget>[
-        CardSettings(
-          text: 'Se déconnecter',
-          action: () {
-            AuthController.to.signOut(); //logOut();
-            // Navigator.pushNamedAndRemoveUntil(context, Router.loginRoute,
-            //    ModalRoute.withName(Router.homeRoute));
-          },
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              CardSettings(
+                text: 'Se déconnecter',
+                action: () {
+                  AuthController.to.signOut();
+                },
+              ),
+              SizedBox(height: 30),
+              CardSettings(
+                text: 'MQTT',
+                action: () {
+                  mqttMain();
+                },
+              ),
+              SizedBox(height: 30),
+              CardSettings(
+                text: 'WIFI',
+                action: () {
+                  connection();
+                },
+              ),
+            ],
+          ),
         ),
-        CardSettings(
-          text: 'MQTT',
-          action: () {
-            mqttMain();
-            // Navigator.pushNamedAndRemoveUntil(context, Router.loginRoute,
-            //    ModalRoute.withName(Router.homeRoute));
-          },
-        ),
-         CardSettings(
-          text: 'WIFI',
-          action: () {
-            connection();
-            // Navigator.pushNamedAndRemoveUntil(context, Router.loginRoute,
-            //    ModalRoute.withName(Router.homeRoute));
-          },
-        ),
-      ])),
+      ),
     );
   }
 }
