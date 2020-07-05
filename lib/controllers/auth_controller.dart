@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:smartcaseflutter/routes.dart';
 import 'package:smartcaseflutter/models/user.dart';
 
-class AuthController extends GetController {
+class AuthController extends GetxController {
 
   // sert a acceder a ce controller partout
   static AuthController get to => Get.put(AuthController());

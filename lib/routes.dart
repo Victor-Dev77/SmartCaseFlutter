@@ -15,13 +15,12 @@ class Router {
   static const String destinationRoute = "/home/destination";
   static const String meteoRoute = "/home/meteo";
 
-  static final routes = {
-    splashRoute : GetRoute(page: SplashScreen()),
-    homeRoute : GetRoute(page: Home()),
-    loginRoute : GetRoute(page: Login()),
-    signUpRoute : GetRoute(page: SignUp()),
-    destinationRoute: GetRoute(page: Destination()),
-    meteoRoute: GetRoute(page: Meteo()),
-  };
-
+  static final routes = [
+    GetPage(name: splashRoute, page: () => SplashScreen()),
+    GetPage(name: homeRoute, page: () => Home()),
+    GetPage(name: loginRoute, page: () => Login()),
+    GetPage(name: signUpRoute, page: () => SignUp()),
+    GetPage(name: destinationRoute, page: () => Destination()),
+    GetPage(name: meteoRoute, page: () => Meteo()),
+  ];
 }

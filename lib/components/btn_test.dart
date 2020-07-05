@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:smartcaseflutter/mqtt/mqtt_client.dart';
 import 'package:wifi_connector/wifi_connector.dart';
 
 import '../controllers/auth_controller.dart';
-import '../mqtt/mqtt_client.dart';
 import 'card_settings.dart';
 
 class BtnTest extends StatelessWidget {
 
-  Future<Null> connection() async {
-    var res = await WifiConnector.connectToWifi(
-        ssid: "SmartCase", password: "SmartCase");
-        print("Connexion wifi: $res");
-  }
+  // Future<Null> connection() async {
+  //   var res = await WifiConnector.connectToWifi(
+  //       ssid: "SmartCase", password: "SmartCase");
+  //       print("Connexion wifi: $res");
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,14 @@ class BtnTest extends StatelessWidget {
         CardSettings(
           text: 'MQTT',
           action: () {
-            mqttMain();
+            //MqttClientContro().mqttMain();
           },
         ),
         SizedBox(height: 10),
         CardSettings(
           text: 'WIFI',
           action: () {
-            connection();
+            // connection();
           },
         ),
       ],

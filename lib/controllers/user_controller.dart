@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:smartcaseflutter/models/user.dart';
 
-class UserController extends GetController {
+class UserController extends GetxController {
 
   static UserController get to => Get.find();
 

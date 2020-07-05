@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.fade,
       initialBinding: InitialBinding(),
-      namedRoutes: Router.routes,
+      getPages: Router.routes,
       // initialRoute: '/',
       home: GetBuilder<StartAppController>(
         init: StartAppController(),
