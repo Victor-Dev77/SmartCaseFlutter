@@ -32,6 +32,7 @@ dependencies:
 
   signal_strength_indicator: ^0.3.0+1
   font_awesome_flutter: ^8.8.1
+  flutter_map: ^0.9.0
 
 
   # Firebase

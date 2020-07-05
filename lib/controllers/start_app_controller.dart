@@ -1,6 +1,5 @@
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:smartcaseflutter/controllers/user_controller.dart';
-import 'package:smartcaseflutter/mqtt/mqtt_client.dart';
 import 'package:smartcaseflutter/repositorys/firebase_auth_repository.dart';
 import 'package:smartcaseflutter/repositorys/firebase_firestore_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smartcaseflutter/mqtt/mqtt_client.dart';
+import 'package:smartcaseflutter/services/mqtt_client.dart';
 import 'package:wifi_connector/wifi_connector.dart';
 
 import '../controllers/auth_controller.dart';
@@ -27,7 +27,7 @@ class BtnTest extends StatelessWidget {
         CardSettings(
           text: 'MQTT',
           action: () {
-            //MqttClientContro().mqttMain();
+            MQTTService.connect();
           },
         ),
         SizedBox(height: 10),
