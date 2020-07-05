@@ -43,7 +43,7 @@ class _LastInfoState extends State<LastInfo> {
           child: Center(
             child: Text(
               "$signal KG",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Color(0xffF9FAFB)),
             ),
           ),
         ),

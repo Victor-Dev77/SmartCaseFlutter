@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:smartcaseflutter/components/feature_btn.dart';
 import 'package:smartcaseflutter/utils/functions.dart';
+
+import '../routes.dart';
 
 class Features extends StatelessWidget {
   final List<Map<String, dynamic>> dataBtn = [
@@ -30,35 +34,19 @@ class Features extends StatelessWidget {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, crossAxisSpacing: 0, mainAxisSpacing: 0),
       itemBuilder: (ctx, index) {
-        return _featureBtn(
-            title: dataBtn[index]["title"], icon: dataBtn[index]["icon"]);
+        return FeatureBtn(
+          title: dataBtn[index]["title"],
+          icon: dataBtn[index]["icon"],
+          onTap: () {
+            if (index == 2)
+              Get.toNamed(Router.meteoRoute);
+            else if (index == 3)
+              Get.toNamed(Router.destinationRoute);
+            else 
+              print("$index click");
+          },
+        );
       },
-    );
-  }
-
-  Widget _featureBtn({@required String title, @required IconData icon}) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-      child: Container(
-        decoration: BoxDecoration(
-            color: randomColor(), borderRadius: BorderRadius.circular(20)),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Icon(
-                icon,
-                size: 60,
-              ),
-              SizedBox(height: 30),
-              Text(
-                title,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
