@@ -12,6 +12,10 @@ DateTime parseDateString(String date, String regex) {
   return Jiffy(date, regex).dateTime;//.utc();
 }
 
+String parseUnix(int unix, String regex) {
+  return Jiffy.unix(unix).format(regex);
+}
+
 int differenceBWDateString(String date1, String date2, String regex) {
   return Jiffy(date1, regex).diff(Jiffy(date2, regex));
 }

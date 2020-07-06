@@ -5,12 +5,7 @@ import 'package:get/state_manager.dart';
 import 'package:latlong/latlong.dart';
 import 'package:smartcaseflutter/controllers/destination_controller.dart';
 
-class DestinationPage extends StatefulWidget {
-  @override
-  _DestinationPageState createState() => _DestinationPageState();
-}
-
-class _DestinationPageState extends State<DestinationPage> {
+class DestinationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,4 +102,6 @@ class _DestinationPageState extends State<DestinationPage> {
       },
     );
   }
+
 }
+
