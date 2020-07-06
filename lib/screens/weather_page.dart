@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:smartcaseflutter/controllers/meteo_controller.dart';
+import 'package:smartcaseflutter/components/weather_ui.dart';
+import 'package:smartcaseflutter/controllers/weather_controller.dart';
 
-class MeteoPage extends StatelessWidget {
+class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         child: Center(
-          child: GetBuilder<MeteoController>(
-            init: MeteoController(),
+          child: GetBuilder<WeatherController>(
+            init: WeatherController(),
             builder: (controller) {
               if (controller.weather == null)
                 return CircularProgressIndicator();
-              return Text(controller.weather.name);
+              return WeatherUI(controller.weather);
             },
           )
         ),
