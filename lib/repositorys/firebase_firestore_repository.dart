@@ -1,5 +1,6 @@
 import 'package:smartcaseflutter/api/firebase_firestore_api.dart';
 import 'package:get/get.dart';
+import 'package:smartcaseflutter/models/destination.dart';
 import 'package:smartcaseflutter/models/user.dart';
 
 class FirebaseFirestoreRepository {
@@ -14,6 +15,10 @@ class FirebaseFirestoreRepository {
 
   setUser(Map<String, dynamic> user) async {
     await _firestoreAPI.setUser(user);
+  }
+
+  Future<List<Destination>> getListDestination(String idUser) async {
+    return await _firestoreAPI.getListDestination(idUser);
   }
 
 }

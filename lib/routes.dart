@@ -1,4 +1,4 @@
-import 'package:smartcaseflutter/screens/destination.dart';
+import 'package:smartcaseflutter/screens/destination_page.dart';
 import 'package:smartcaseflutter/screens/home.dart';
 import 'package:smartcaseflutter/screens/login.dart';
 import 'package:smartcaseflutter/screens/meteo.dart';
@@ -20,7 +20,7 @@ class Router {
     GetPage(name: homeRoute, page: () => Home()),
     GetPage(name: loginRoute, page: () => Login()),
     GetPage(name: signUpRoute, page: () => SignUp()),
-    GetPage(name: destinationRoute, page: () => Destination()),
+    GetPage(name: destinationRoute, page: () => DestinationPage()),
     GetPage(name: meteoRoute, page: () => Meteo()),
   ];
 }
