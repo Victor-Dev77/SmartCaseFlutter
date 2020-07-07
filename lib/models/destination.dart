@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:smartcaseflutter/utils/functions.dart';
+import 'package:smartcaseflutter/utils/date_handle.dart';
 
 class Destination {
   final String id;
@@ -20,7 +20,7 @@ class Destination {
         id: doc['id'],
         city: doc['city'],
         location: doc['location'],
-        date: parseDateTime(doc["date"].toDate(), "dd/MM/yyyy"),
+        date: DateHandle.to.parseDateTime(doc["date"].toDate(), "dd/MM/yyyy"),
     );
   }
 
@@ -29,7 +29,7 @@ class Destination {
       "id": id,
       "city": city,
       "location": location,
-      "date": parseDateString(date, "dd/MM/yyyy")
+      "date": DateHandle.to.parseDateString(date, "dd/MM/yyyy")
     };
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:smartcaseflutter/utils/date_handle.dart';
 import 'package:smartcaseflutter/utils/functions.dart';
 
 class WeatherCurrent {
 
   final String description, date;
-  final double temperature;
-  final int windSpeed, indiceUV, humidity;
+  final int temperature, windSpeed, indiceUV, humidity;
 
   WeatherCurrent({
     @required this.description,
@@ -19,8 +19,8 @@ class WeatherCurrent {
   factory WeatherCurrent.fromJson(Map<String, dynamic> json) {
     return WeatherCurrent(
       description: (json['weather'][0])["description"],
-      date: parseUnix(json["dt"], "dd/MM/yyyy HH:mm"),
-      temperature: double.parse("${json["temp"]}"),
+      date: DateHandle.to.parseUnix(json["dt"], "dd/MM/yyyy HH:mm"),
+      temperature: double.parse("${json["temp"]}").round(),
       indiceUV: double.parse("${json["uvi"]}").round(),
       humidity: double.parse("${json["humidity"]}").round(),
       windSpeed: (double.parse("${json["wind_speed"]}") * 3.6).round(), //m/s -> km/h

@@ -7,6 +7,7 @@ class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff293251),
       body: Container(
         child: Center(
           child: GetBuilder<WeatherController>(
@@ -16,7 +17,7 @@ class WeatherPage extends StatelessWidget {
                 return CircularProgressIndicator();
               return WeatherUI(controller.weather);
             },
-          )
+          ),
         ),
       ),
     );

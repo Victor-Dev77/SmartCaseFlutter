@@ -8,6 +8,7 @@ import 'package:smartcaseflutter/utils/constant_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:smartcaseflutter/utils/date_handle.dart';
 
 void main() async {
   //Assure que le moteur graphique Flutter est init
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           }
         },
       ),
+      locale: Locale("fr", "FR"),
       supportedLocales: [
         const Locale('fr', 'FR'), // include country code too
       ],
@@ -59,6 +61,7 @@ class InitialBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(UserController());
+    Get.put(DateHandle());
   }
 
 }

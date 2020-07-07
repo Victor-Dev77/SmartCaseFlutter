@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:smartcaseflutter/utils/functions.dart';
+import 'package:smartcaseflutter/utils/date_handle.dart';
 
 class WeatherDaily {
 
   final String descriptionDaily, dateDaily;
-  final double tempDaily;
+  final int tempDaily;
 
   WeatherDaily({
     @required this.descriptionDaily,
@@ -15,8 +15,8 @@ class WeatherDaily {
   factory WeatherDaily.fromJson(Map<String, dynamic> json) {
     return WeatherDaily(
       descriptionDaily: (json['weather'][0])["description"],
-      dateDaily: parseUnix(json["dt"], "dd/MM/yyyy HH:mm"),
-      tempDaily: double.parse("${json["temp"]["day"]}"),
+      dateDaily: "${DateHandle.to.parseUnix(json["dt"], "E dd")[0].toUpperCase()}${DateHandle.to.parseUnix(json["dt"], "E dd").substring(1)}",
+      tempDaily: double.parse("${json["temp"]["day"]}").round(),
     );
   }
 

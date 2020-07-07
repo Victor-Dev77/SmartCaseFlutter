@@ -4,6 +4,7 @@ import 'package:smartcaseflutter/controllers/user_controller.dart';
 import 'package:smartcaseflutter/models/destination.dart';
 import 'package:smartcaseflutter/repositorys/firebase_firestore_repository.dart';
 import 'package:latlong/latlong.dart';
+import 'package:smartcaseflutter/utils/date_handle.dart';
 import 'package:smartcaseflutter/utils/functions.dart';
 
 class DestinationController extends GetxController {
@@ -28,7 +29,7 @@ class DestinationController extends GetxController {
 
   _initData() async {
     _listDestination = await _bddRepo.getListDestination(UserController.to.user.id);
-    _listDestination.sort((a, b) => differenceBWDateString(b.date, a.date, "dd/MM/yyyy"));
+    _listDestination.sort((a, b) => DateHandle.to.differenceBWDateString(b.date, a.date, "dd/MM/yyyy"));
     update();
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:smartcaseflutter/models/weather/weather.dart';
+import 'package:smartcaseflutter/models/weather/weather_daily.dart';
 
 class WeatherUI extends StatelessWidget {
   final Weather weather;
@@ -26,7 +27,13 @@ class WeatherUI extends StatelessWidget {
     return Expanded(
       flex: 2,
       child: Container(
-        color: Colors.grey,
+        child: Center(
+          child: Icon(
+            _handleWeatherDescription(weather.weatherCurrent.description),
+            color: Color(0xff80BFFD),
+            size: 125,
+          ),
+        ),
       ),
     );
   }
@@ -93,7 +100,8 @@ class WeatherUI extends StatelessWidget {
             topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
         color: Color(0xff384366),
       ),
-      child: _currentWeatherInfo("${weather.weatherCurrent.windSpeed}", FontAwesomeIcons.wind, "Vent"),
+      child: _currentWeatherInfo(
+          "${weather.weatherCurrent.windSpeed}", FontAwesomeIcons.wind, "Vent"),
     );
   }
 
@@ -124,7 +132,8 @@ class WeatherUI extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(right: 3),
       color: Color(0xff384366),
-      child: _currentWeatherInfo("${weather.weatherCurrent.indiceUV}", FontAwesomeIcons.sun, "Indice UV"),
+      child: _currentWeatherInfo("${weather.weatherCurrent.indiceUV}",
+          FontAwesomeIcons.sun, "Indice UV"),
     );
   }
 
@@ -135,15 +144,62 @@ class WeatherUI extends StatelessWidget {
             topRight: Radius.circular(10), bottomRight: Radius.circular(10)),
         color: Color(0xff384366),
       ),
-      child: _currentWeatherInfo("${weather.weatherCurrent.humidity}", FontAwesomeIcons.cloudRain, "Humidité"),
+      child: _currentWeatherInfo("${weather.weatherCurrent.humidity}",
+          FontAwesomeIcons.cloudRain, "Humidité"),
     );
   }
 
   Widget _buildLocation() {
     return Expanded(
       child: Container(
-        color: Colors.blueGrey,
+        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        decoration: BoxDecoration(
+          color: Color(0xff384366),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: ListView.builder(
+            itemCount: weather.listWeatherDaily.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (ctx, index) {
+              return _buildDailyWeather(weather.listWeatherDaily[index]);
+            }),
       ),
     );
+  }
+
+  _buildDailyWeather(WeatherDaily weather) {
+    return Container(
+        width: 90,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              weather.dateDaily,
+              style: TextStyle(
+                  color: Colors.grey[300],
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 13),
+              child: Icon(_handleWeatherDescription(weather.descriptionDaily),
+                  color: Color(0xff80BFFD)),
+            ),
+            Text(
+              "${weather.tempDaily}°c",
+              style: TextStyle(color: Colors.grey[300], fontSize: 16),
+            ),
+          ],
+        ));
+  }
+
+  IconData _handleWeatherDescription(String desc) {
+    if (desc.contains("ciel dégagé") || desc.contains("peu nuageux"))
+      return FontAwesomeIcons.cloudSun;
+    else if (desc.contains("nuageux"))
+      return FontAwesomeIcons.cloud;
+    else if (desc.contains("légère pluie"))
+      return FontAwesomeIcons.cloudSunRain;
+    return FontAwesomeIcons.sun;
   }
 }
