@@ -1,9 +1,14 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:smartcaseflutter/models/weather/weather.dart';
+import 'package:smartcaseflutter/utils/snackbar.dart';
 
 class WeatherController extends GetxController {
+
+  static WeatherController get to => Get.find(); 
+
   String city = "Paris";
   String apiKey = "bf7e87f71ff5193cd53b3c5e50239287";
   String language = "fr";
@@ -12,6 +17,10 @@ class WeatherController extends GetxController {
   String endURL = "";
 
   Weather weather;
+  bool searchOpen = false;
+  TextEditingController cityController = TextEditingController();
+  String _tempCity;
+  Weather _tempWeather;
 
   @override
   void onInit() {
@@ -22,6 +31,7 @@ class WeatherController extends GetxController {
 
   _initWeather() async {
     weather = await _composeURL();
+    cityController.text = "";
     update();
   }
 
@@ -47,10 +57,27 @@ class WeatherController extends GetxController {
           throw Exception('Failed to load weather daily');
         }
       } else {
-        throw Exception('Failed to load weather coord');
+        CustomSnackbar.snackbar("Ville erronée !");
+        city = _tempCity;
+        weather = _tempWeather;
+        return weather;
       }
     } finally {
       client.close();
     }
+  }
+
+  searchCity() {
+    if (!searchOpen) {
+      searchOpen = true;
+      update();
+      return;
+    }
+    if (cityController.text.trim().length <= 3 || city == cityController.text.trim())
+      return;
+    _tempWeather = weather;
+    _tempCity = city;
+    city = cityController.text.trim();
+    _initWeather();
   }
 }

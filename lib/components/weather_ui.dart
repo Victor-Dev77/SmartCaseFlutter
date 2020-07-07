@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/state_manager.dart';
+import 'package:smartcaseflutter/controllers/weather_controller.dart';
 import 'package:smartcaseflutter/models/weather/weather.dart';
 import 'package:smartcaseflutter/models/weather/weather_daily.dart';
 
@@ -9,15 +11,65 @@ class WeatherUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xff293251),
-      width: double.infinity,
-      child: Column(
+    return SingleChildScrollView(
+      child: Container(
+        color: Color(0xff293251),
+        width: double.infinity,
+        height: MediaQuery.of(context).size.height,
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Column(
+            children: <Widget>[
+              _buildAppBar(),
+              _buildImageDesc(),
+              _buildDescAndTemp(),
+              _buildMoreInfo(),
+              _buildLocation(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAppBar() {
+    return Padding(
+      padding: EdgeInsets.only(top: 50, right: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
-          _buildImageDesc(),
-          _buildDescAndTemp(),
-          _buildMoreInfo(),
-          _buildLocation(),
+          GetBuilder<WeatherController>(
+            builder: (controller) {
+              if (!controller.searchOpen) return Container();
+              return Container(
+                width: 250,
+                child: TextField(
+                  controller: controller.cityController,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500, color: Colors.grey[300]),
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    suffixIcon: Icon(
+                      Icons.email,
+                      color: Colors.grey[300],
+                    ),
+                    hintText: 'Rechercher une ville',
+                    hintStyle: TextStyle(
+                        fontWeight: FontWeight.w400, color: Colors.grey[300]),
+                  ),
+                ),
+              );
+            },
+          ),
+          SizedBox(width: 25),
+          GestureDetector(
+            onTap: () => WeatherController.to.searchCity(),
+            child: Icon(
+              Icons.search,
+              color: Colors.grey[300],
+              size: 30,
+            ),
+          )
         ],
       ),
     );
@@ -25,7 +77,7 @@ class WeatherUI extends StatelessWidget {
 
   Widget _buildImageDesc() {
     return Expanded(
-      flex: 2,
+      // flex: 2,
       child: Container(
         child: Center(
           child: Icon(
@@ -42,6 +94,7 @@ class WeatherUI extends StatelessWidget {
     return Expanded(
       child: Column(
         children: <Widget>[
+          SizedBox(height: 15),
           RichText(
             text: TextSpan(
               text: "${weather.weatherCurrent.temperature}",
