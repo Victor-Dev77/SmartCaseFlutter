@@ -20,7 +20,7 @@ class _ScannerLocalisationState extends State<ScannerLocalisation>
   Animation<double> _opacityAnimation;
   Animation<Color> _colorAnimation;
   Animation<double> _containerAnimation;
-  Timer _timerUpdateSignal;
+  // Timer _timerUpdateSignal;
 
   @override
   void initState() {
@@ -48,14 +48,15 @@ class _ScannerLocalisationState extends State<ScannerLocalisation>
     _containerAnimation = Tween(begin: 0.0, end: 100.0).animate(CurvedAnimation(
         parent: scannerAnimationController, curve: Interval(0.6, 1.0)));
     // scannerAnimationController.forward();
-    _timerUpdateSignal = Timer.periodic(
-        Duration(seconds: 5), (_) => MQTTController.to.updateIntensity());
+    // _timerUpdateSignal = Timer.periodic(
+    //     Duration(seconds: 5), (_) => MQTTController.to.updateIntensity());
   }
 
   @override
   void dispose() {
     scannerAnimationController.dispose();
-    _timerUpdateSignal.cancel();
+    scannerAnimationController = null;
+    // _timerUpdateSignal.cancel();
     super.dispose();
   }
 

@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:get/get.dart';
 import 'package:smartcaseflutter/components/scanner_localisation.dart';
+import 'package:smartcaseflutter/services/mqtt_client.dart';
+import 'package:smartcaseflutter/services/notifications.dart';
 
 class MQTTController extends GetxController {
 
@@ -16,37 +18,53 @@ class MQTTController extends GetxController {
   String _textLocalisation = "Aucune connexion...";
   String get textLocalisation => this._textLocalisation;
   
+  
   updateWifiSignal(String payload) {
-    _wifiValue = int.parse(payload).abs();
+    if(payload == "Je suis mort" || payload == "Je suis mort FLUTTER") {
+      _wifiValue = 0;
+    } else {
+      _wifiValue = int.parse(payload).abs();
+    }
+    updateIntensity();
+    NotificationService.to.showNotif(_wifiValue);
     update();
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+    MQTTService.connect();
+    Get.put(NotificationService());
+  }
+
   updateIntensity() {
-    int value = 10 + Random().nextInt(91); // 10 a 90
-    print(value);
-    if (value < 25) {
-      _intensityLocalisation = 4;
-      _textLocalisation = "Valise très proche";
-    }
-    else if (value >= 25 && value < 50) {
-      _intensityLocalisation = 3;
-      _textLocalisation = "Valise proche";
-    }
-    else if (value >= 50 && value < 75) {
-      _intensityLocalisation = 2;
-      _textLocalisation = "Valise éloignée";
-    }
-    else if (value >= 75 && value < 90) {
-      _intensityLocalisation = 1;
-      _textLocalisation = "Valise hors de portée";
-    }
-    else if (value > 90) {
+    //int value = 10 + Random().nextInt(91); // 10 a 90
+    //print(value);
+    if (_wifiValue == 0 || _wifiValue > 90) {
       _intensityLocalisation = 0;
       _textLocalisation = "Aucune connexion...";
     }
-    update();
-    if (!scannerAnimationController.isAnimating)
+    else if (_wifiValue < 25) {
+      _intensityLocalisation = 4;
+      _textLocalisation = "Valise très proche";
+    }
+    else if (_wifiValue >= 25 && _wifiValue < 50) {
+      _intensityLocalisation = 3;
+      _textLocalisation = "Valise proche";
+    }
+    else if (_wifiValue >= 50 && _wifiValue < 75) {
+      _intensityLocalisation = 2;
+      _textLocalisation = "Valise éloignée";
+    }
+    else if (_wifiValue >= 75 && _wifiValue < 90) {
+      _intensityLocalisation = 1;
+      _textLocalisation = "Valise hors de portée";
+    }
+    if (scannerAnimationController !=null && !scannerAnimationController.isAnimating)
       scannerAnimationController.forward();
+    if(_wifiValue == 0 && scannerAnimationController !=null){
+      scannerAnimationController.reset();
+    }
   }
 
 }

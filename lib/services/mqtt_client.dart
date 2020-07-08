@@ -6,14 +6,14 @@ import 'package:smartcaseflutter/controllers/mqtt_conttroller.dart';
 // VICTOR: a041fdaa48d64d6694d93b469490733d
 
 class MQTTService {
-  static final String topicWifi = 'wifi/#';
+  static final String topicWifi = 'WIFI/#';
 
   static final client = MqttServerClient.withPort(
       '0.tcp.ngrok.io', '5ae8f88e13c14cc1b990bcae08a71bc2', 15013);
 
   static connect() async {
     client.logging(on: true);
-    client.keepAlivePeriod = 20;
+    client.keepAlivePeriod = 5;
     client.autoReconnect = true;
     client.onAutoReconnect = _onAutoReconnect;
     client.onDisconnected = _onDisconnected;
@@ -22,8 +22,8 @@ class MQTTService {
 
     final connMess = MqttConnectMessage()
         .withClientIdentifier('a041fdaa48d64d6694d93b469490733d')
-        .keepAliveFor(20)
-        .withWillTopic('wifi/death')
+        .keepAliveFor(5)
+        .withWillTopic('WIFI/death')
         .withWillMessage('Je suis mort FLUTTER')
         .startClean() // Non persistent session for testing
         .withWillQos(MqttQos.atMostOnce);
