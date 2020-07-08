@@ -9,7 +9,7 @@ class MQTTController extends GetxController {
 
   
   updateWifiSignal(String payload) {
-    _wifiValue = int.parse(payload);
+    _wifiValue = int.parse(payload).abs();
     update();
   }
 

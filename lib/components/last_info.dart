@@ -23,14 +23,20 @@ class LastInfo extends StatelessWidget {
       children: <Widget>[
         Expanded(
           child: Center(
-            child: SignalStrengthIndicator.sector(
+            child: SignalStrengthIndicator.bars(
               minValue: 0,
-              value: controller.wifiValue,
+              value: (90 - controller.wifiValue+10)*0.01,
               maxValue: 1,
+              levels: {
+                0: Colors.red,
+                0.25: Colors.orange,
+                0.50: Colors.yellow,
+                0.75: Colors.green,
+              },
               size: 50,
               barCount: 4,
               spacing: 0.5,
-              activeColor: randomColor(),
+              //activeColor: randomColor(),
             ),
           ),
         ),
