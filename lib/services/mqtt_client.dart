@@ -21,7 +21,7 @@ class MQTTService {
     client.onSubscribed = _onSubscribed;
 
     final connMess = MqttConnectMessage()
-        .withClientIdentifier('5ae8f88e13c14cc1b990bcae08a71bc2')
+        .withClientIdentifier('a041fdaa48d64d6694d93b469490733d')
         .keepAliveFor(20)
         .withWillTopic('wifi/death')
         .withWillMessage('Je suis mort FLUTTER')

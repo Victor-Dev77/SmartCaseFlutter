@@ -1,5 +1,6 @@
 import 'package:smartcaseflutter/screens/destination_page.dart';
 import 'package:smartcaseflutter/screens/home.dart';
+import 'package:smartcaseflutter/screens/localisation_suitcase.dart';
 import 'package:smartcaseflutter/screens/login.dart';
 import 'package:smartcaseflutter/screens/sign_up.dart';
 import 'package:smartcaseflutter/screens/splashscreen.dart';
@@ -14,6 +15,7 @@ class Router {
   static const String signUpRoute = "/signup";
   static const String destinationRoute = "/home/destination";
   static const String meteoRoute = "/home/meteo";
+  static const String localisationRoute = "/home/localisation";
 
   static final routes = [
     GetPage(name: splashRoute, page: () => SplashScreen()),
@@ -22,5 +24,6 @@ class Router {
     GetPage(name: signUpRoute, page: () => SignUp()),
     GetPage(name: destinationRoute, page: () => DestinationPage()),
     GetPage(name: meteoRoute, page: () => WeatherPage()),
+    GetPage(name: localisationRoute, page: () => LocalisationPage()),
   ];
 }

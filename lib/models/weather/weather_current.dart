@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smartcaseflutter/utils/date_handle.dart';
-import 'package:smartcaseflutter/utils/functions.dart';
 
 class WeatherCurrent {
 

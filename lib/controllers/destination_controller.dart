@@ -5,7 +5,6 @@ import 'package:smartcaseflutter/models/destination.dart';
 import 'package:smartcaseflutter/repositorys/firebase_firestore_repository.dart';
 import 'package:latlong/latlong.dart';
 import 'package:smartcaseflutter/utils/date_handle.dart';
-import 'package:smartcaseflutter/utils/functions.dart';
 
 class DestinationController extends GetxController {
   static DestinationController get to => Get.put(DestinationController());
