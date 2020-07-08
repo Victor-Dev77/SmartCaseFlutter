@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:smartcaseflutter/models/weather/weather.dart';
 import 'package:smartcaseflutter/utils/snackbar.dart';
+import 'package:latlong/latlong.dart';
 
 class WeatherController extends GetxController {
-
-  static WeatherController get to => Get.find(); 
+  static WeatherController get to => Get.find();
 
   String city = "Paris";
   String apiKey = "bf7e87f71ff5193cd53b3c5e50239287";
@@ -35,6 +35,20 @@ class WeatherController extends GetxController {
     update();
   }
 
+  /*Future<String> getCityWithCoord(LatLng coord) async {
+    String finalURL = hostWeatherDaily +
+        "lat=${coord.latitude}&lon=${coord.longitude}&exclude=minutely,hourly" +
+        endURL;
+    var responseWeather = await http.get(finalURL);
+    if (responseWeather.statusCode == 200) {
+      Weather weather = Weather.fromJson(
+          json.decode(responseWeather.body), finalURL, "id", "city", country); 
+    } else {
+      CustomSnackbar.snackbar("Erreur chargement météo !");
+      return null;
+    }
+  }*/
+
   //TODO: a decouper en plusieurs fonctions
   Future<Weather> _composeURL() async {
     endURL = "&appid=$apiKey&units=metric&lang=$language";
@@ -49,12 +63,18 @@ class WeatherController extends GetxController {
         var city = data['name'];
         var country = data["sys"]["country"];
         var id = "${data['id']}";
-        String finalURL = hostWeatherDaily + "lat=$lat&lon=$lon&exclude=minutely,hourly" + endURL; 
+        String finalURL = hostWeatherDaily +
+            "lat=$lat&lon=$lon&exclude=minutely,hourly" +
+            endURL;
         var responseWeather = await client.get(finalURL);
         if (responseWeather.statusCode == 200) {
-          return Weather.fromJson(json.decode(responseWeather.body), finalURL, id, city, country);
+          return Weather.fromJson(
+              json.decode(responseWeather.body), finalURL, id, city, country);
         } else {
-          throw Exception('Failed to load weather daily');
+          CustomSnackbar.snackbar("Erreur chargement météo !");
+          city = _tempCity;
+          weather = _tempWeather;
+          return weather;
         }
       } else {
         CustomSnackbar.snackbar("Ville erronée !");
@@ -73,8 +93,8 @@ class WeatherController extends GetxController {
       update();
       return;
     }
-    if (cityController.text.trim().length <= 3 || city == cityController.text.trim())
-      return;
+    if (cityController.text.trim().length <= 3 ||
+        city == cityController.text.trim()) return;
     _tempWeather = weather;
     _tempCity = city;
     city = cityController.text.trim();

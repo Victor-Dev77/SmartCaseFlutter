@@ -27,15 +27,11 @@ class MyApp extends StatelessWidget {
         primaryColor: ConstantColor.primaryColor,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         scaffoldBackgroundColor: ConstantColor.white,
-        //textTheme: TextTheme(
-
-        //)
       ),
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.fade,
       initialBinding: InitialBinding(),
       getPages: Router.routes,
-      // initialRoute: '/',
       home: GetBuilder<StartAppController>(
         init: StartAppController(),
         builder: (controller) {
@@ -49,11 +45,23 @@ class MyApp extends StatelessWidget {
           }
         },
       ),
+      builder: (context, child) {
+        return ScrollConfiguration(
+          behavior: MyBehavior(),
+          child: child,
+        );
+      },
       locale: Locale("fr", "FR"),
-      supportedLocales: [
-        const Locale('fr', 'FR'), // include country code too
-      ],
     );
+  }
+}
+
+// Remove Scroll Overlay / Glow in List / Grid
+class MyBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }
 

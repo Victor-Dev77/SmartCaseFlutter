@@ -21,4 +21,8 @@ class FirebaseFirestoreRepository {
     return await _firestoreAPI.getListDestination(idUser);
   }
 
+  addDestination(String idUser, Map<String, dynamic> destination) async {
+    await _firestoreAPI.addDestination(idUser, destination);
+  }
+
 }

@@ -41,4 +41,12 @@ class FirebaseFirestoreAPI {
     return null;
   }
 
+  addDestination(String idUser, Map<String, dynamic> destination) async {
+    await _collectionDestination
+        .document(idUser)
+        .collection("places")
+        .document(destination["id"])
+        .setData(destination);
+  }
+
 }

@@ -9,17 +9,35 @@ class DestinationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff26282e),
+      backgroundColor: Color(0xff293251),
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: <Widget>[
-            Expanded(
-              flex: 3,
-              child: _buildMap(),
+            Column(
+              children: <Widget>[
+                Expanded(
+                  flex: 3,
+                  child: _buildMap(),
+                ),
+                Expanded(
+                  child: _buildListDestination(),
+                )
+              ],
             ),
-            Expanded(
-              child: _buildListDestination(),
-            )
+            Positioned(
+              child: FloatingActionButton(
+                backgroundColor: Color(0xff80BFFD),
+                onPressed: () => DestinationController.to.showAddressDialog(),
+                child: Center(
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              right: 20,
+              top: MediaQuery.of(context).size.height * 0.75 - 50,
+            ),
           ],
         ),
       ),
@@ -81,9 +99,13 @@ class DestinationPage extends StatelessWidget {
       builder: (controller) {
         if (controller.listDestination.length == 0)
           return Center(
-            child: Text("Aucune destination ajoutée", style: style,),
+            child: Text(
+              "Aucune destination ajoutée",
+              style: style,
+            ),
           );
         return Container(
+          margin: EdgeInsets.only(top: 20),
           child: ListView.builder(
             itemCount: controller.listDestination.length,
             itemBuilder: (ctx, index) {
@@ -102,6 +124,4 @@ class DestinationPage extends StatelessWidget {
       },
     );
   }
-
 }
-
