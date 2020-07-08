@@ -19,4 +19,12 @@ class User {
         pseudo: doc['pseudo'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "pseudo": pseudo,
+      "mail": mail
+    };
+  }
 }

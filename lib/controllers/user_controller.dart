@@ -7,7 +7,10 @@ class UserController extends GetxController {
 
   User _user;
   User get user => this._user;
-  set user(value) => this._user = value;
 
+  initUser(User user) async {
+    _user = user;
+    update();
+  }
 
 }

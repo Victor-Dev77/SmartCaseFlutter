@@ -1,9 +1,6 @@
-import 'package:smartcaseflutter/controllers/start_app_controller.dart';
+import 'package:smartcaseflutter/controllers/auth_controller.dart';
 import 'package:smartcaseflutter/controllers/user_controller.dart';
 import 'package:smartcaseflutter/routes.dart';
-import 'package:smartcaseflutter/screens/home.dart';
-import 'package:smartcaseflutter/screens/login.dart';
-import 'package:smartcaseflutter/screens/splashscreen.dart';
 import 'package:smartcaseflutter/utils/constant_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,19 +29,7 @@ class MyApp extends StatelessWidget {
       defaultTransition: Transition.fade,
       initialBinding: InitialBinding(),
       getPages: Router.routes,
-      home: GetBuilder<StartAppController>(
-        init: StartAppController(),
-        builder: (controller) {
-          switch (controller.authStatus) {
-            case AuthStatus.loading:
-              return SplashScreen();
-            case AuthStatus.connected:
-              return Home();
-            case AuthStatus.disconnected:
-              return Login();
-          }
-        },
-      ),
+      initialRoute: Router.splashRoute,
       builder: (context, child) {
         return ScrollConfiguration(
           behavior: MyBehavior(),
@@ -69,6 +54,7 @@ class InitialBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(UserController());
+    Get.put(AuthController());
     Get.put(DateHandle());
   }
 

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:smartcaseflutter/models/weather/weather_current.dart';
 import 'package:smartcaseflutter/models/weather/weather_daily.dart';
@@ -20,14 +19,6 @@ class Weather {
     @required this.listWeatherDaily,
   });
 
-  factory Weather.fromDocument(DocumentSnapshot doc) {
-    return Weather(
-      id: doc['id'],
-      city: doc['city'],
-      location: doc['location'],
-    );
-  }
-
   factory Weather.fromJson(
       Map<String, dynamic> json, String url, String id, String city, String country) {
     return Weather(
@@ -45,7 +36,4 @@ class Weather {
       }),
     );
   }
-
-  //TODO: merge tableau (idUser -> array contains all link api)
-  // toMap()
 }

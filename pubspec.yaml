@@ -36,6 +36,7 @@ dependencies:
   jiffy: ^3.0.1 
   http: ^0.12.1
   flutter_google_places: ^0.2.5
+  the_validator: ^1.0.1               # validator textfield
 
   # Firebase
   firebase_core: ^0.4.5
