@@ -9,6 +9,7 @@ class NotificationService extends GetxController {
   FlutterLocalNotificationsPlugin localNotif = new FlutterLocalNotificationsPlugin();
 
   bool boolNotif = true;
+  bool boolMort = true;
 
   initNotif() async {
     var initSettingsAndroid = new AndroidInitializationSettings('notif_logo');
@@ -43,15 +44,18 @@ class NotificationService extends GetxController {
         platformChannelSpecifics,
       );
       boolNotif = false;
-    } else if(value > 75 || value == 0){
+    } else if(value > 75 || value == 0 && boolMort){
       await localNotif.show(
         0,
         '⛔️ ATTENTION ⛔️',
         '🏃‍♂️Votre valise est hors de portée, revenez vite en arrière !! 🏃‍♂',
         platformChannelSpecifics,
       );
+      boolMort = false;
     } else if(value <= 35){
       boolNotif = true;
+    } else if(value <=60){
+      boolMort = true;
     }
   }
 }

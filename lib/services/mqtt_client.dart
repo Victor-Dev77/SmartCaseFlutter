@@ -7,6 +7,7 @@ import 'package:smartcaseflutter/controllers/mqtt_conttroller.dart';
 
 class MQTTService {
   static final String topicWifi = 'WIFI/#';
+  static final String topicPoids = 'POIDS/pa';
 
   static final client = MqttServerClient.withPort(
       '0.tcp.ngrok.io', '5ae8f88e13c14cc1b990bcae08a71bc2', 15013);
@@ -48,21 +49,36 @@ class MQTTService {
     }
 
     client.subscribe(topicWifi, MqttQos.atMostOnce);
+    client.subscribe(topicPoids, MqttQos.atMostOnce);
 
     client.updates.listen((List<MqttReceivedMessage<MqttMessage>> c) {
       final MqttPublishMessage recMess = c[0].payload;
-      String _wifiValue =
-          MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
+      if(c[0].topic == topicWifi){
+        String _wifiValue =
+            MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
 
-      /// The above may seem a little convoluted for users only interested in the
-      /// payload, some users however may be interested in the received publish message,
-      /// lets not constrain ourselves yet until the package has been in the wild
-      /// for a while.
-      /// The payload is a byte buffer, this will be specific to the topic
-      print(
-          'EXAMPLE::Change notification:: topic is <${c[0].topic}>, payload is <-- $_wifiValue -->');
-      print('');
-      MQTTController.to.updateWifiSignal(_wifiValue);
+        /// The above may seem a little convoluted for users only interested in the
+        /// payload, some users however may be interested in the received publish message,
+        /// lets not constrain ourselves yet until the package has been in the wild
+        /// for a while.
+        /// The payload is a byte buffer, this will be specific to the topic
+        print(
+            'EXAMPLE::Change notification:: topic is <${c[0].topic}>, payload is <-- $_wifiValue -->');
+        print('');
+        MQTTController.to.updateWifiSignal(_wifiValue);
+      }
+      String _poidValue =
+            MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
+
+        /// The above may seem a little convoluted for users only interested in the
+        /// payload, some users however may be interested in the received publish message,
+        /// lets not constrain ourselves yet until the package has been in the wild
+        /// for a while.
+        /// The payload is a byte buffer, this will be specific to the topic
+        print(
+            'EXAMPLE::Change notification:: topic is <${c[0].topic}>, payload is <-- $_poidValue -->');
+        print('');
+        MQTTController.to.updatePoids(_poidValue);
     });
   }
 

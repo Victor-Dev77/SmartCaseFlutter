@@ -9,10 +9,10 @@ class LocalisationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff384366),
+      backgroundColor: Color(0xff293251),
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color(0xff384366),
+        backgroundColor: Color(0xff293251),
         automaticallyImplyLeading: false,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),

@@ -10,6 +10,9 @@ class MQTTController extends GetxController {
   num _wifiValue = 0;
   num get wifiValue => this._wifiValue;
 
+  RxDouble _poidValue = 0.0.obs;
+  double get poidValue => this._poidValue.value;
+
   int _intensityLocalisation = 1;
   int get intensityLocalisation => this._intensityLocalisation;
 
@@ -26,6 +29,15 @@ class MQTTController extends GetxController {
     updateIntensity();
     NotificationService.to.showNotif(_wifiValue);
     update();
+  }
+
+  updatePoids(String payload) {
+    if(payload == "Je suis mort" || payload == "Je suis mort FLUTTER") {
+      _poidValue.value = 0.0;
+    } else {
+      _poidValue.value = double.parse(payload);
+    }
+    //update(["poids"]);
   }
 
   @override

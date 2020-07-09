@@ -45,6 +45,8 @@ class Features extends StatelessWidget {
   _handleNav(int index) {
     if (index == 0)
       Get.toNamed(Router.localisationRoute);
+    else if (index == 1)
+      Get.toNamed(Router.poidsRoute);
     else if (index == 2)
       Get.toNamed(Router.meteoRoute);
     else if (index == 3)
