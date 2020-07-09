@@ -21,7 +21,7 @@ class RoundBtn extends StatelessWidget {
         ),
       ),
       elevation: 6.0,
-      fillColor: ConstantColor.primaryColor,
+      fillColor: ConstantColor.ternaryBlue,
       shape: StadiumBorder(),
     );
   }

@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/state_manager.dart';
 import 'package:latlong/latlong.dart';
 import 'package:smartcaseflutter/controllers/destination_controller.dart';
+import 'package:smartcaseflutter/utils/constant_color.dart';
 
 class DestinationPage extends StatelessWidget {
   @override
@@ -37,6 +38,17 @@ class DestinationPage extends StatelessWidget {
               ),
               right: 20,
               top: MediaQuery.of(context).size.height * 0.75 - 50,
+            ),
+            Positioned(
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                color: ConstantColor.white,
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+              ),
+              left: 6,
+              top: MediaQuery.of(context).size.height*0.015,
             ),
           ],
         ),

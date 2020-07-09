@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:smartcaseflutter/models/weather/weather.dart';
 import 'package:smartcaseflutter/utils/snackbar.dart';
-import 'package:latlong/latlong.dart';
 
 class WeatherController extends GetxController {
   static WeatherController get to => Get.find();

@@ -1,3 +1,4 @@
+import 'package:lottie/lottie.dart';
 import 'package:smartcaseflutter/utils/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +13,16 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          height: 300,
-          width: 300,
-          child: Image.asset(
-            Constant.pathLogoImage,
-            fit: BoxFit.contain,
-          ),
-        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Lottie.asset(
+              Constant.pathLottie,
+              width: 170,
+              height: 420
+            ),
+          ],
+        )
       ),
     );
   }

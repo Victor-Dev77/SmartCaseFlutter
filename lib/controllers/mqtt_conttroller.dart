@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:get/get.dart';
 import 'package:smartcaseflutter/components/scanner_localisation.dart';
 import 'package:smartcaseflutter/services/mqtt_client.dart';

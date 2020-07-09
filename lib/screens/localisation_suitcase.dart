@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:smartcaseflutter/components/scanner_localisation.dart';
 import 'package:smartcaseflutter/controllers/mqtt_conttroller.dart';
+import 'package:smartcaseflutter/utils/constant_color.dart';
 
 class LocalisationPage extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class LocalisationPage extends StatelessWidget {
             Align(
               alignment: Alignment.topCenter,
               child: Padding(
-                  padding: EdgeInsets.only(top: 70),
+                  padding: EdgeInsets.only(top: 70, left: 20),
                   child: GetBuilder<MQTTController>(
                     builder: (controller) {
                       return Text(
@@ -28,7 +29,18 @@ class LocalisationPage extends StatelessWidget {
                       );
                     },
                   )),
-            )
+            ),
+            Positioned(
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                color: ConstantColor.white,
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+              ),
+              left: 6,
+              top: MediaQuery.of(context).size.height*0.085,
+            ),
           ],
         )),
       ),

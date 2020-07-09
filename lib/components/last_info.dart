@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:signal_strength_indicator/signal_strength_indicator.dart';
 import 'package:smartcaseflutter/controllers/mqtt_conttroller.dart';
+import 'package:lottie/lottie.dart';
+import 'package:smartcaseflutter/utils/constant.dart';
+
 
 class LastInfo extends StatelessWidget {
 
@@ -37,12 +40,11 @@ class LastInfo extends StatelessWidget {
                 barCount: 4,
                 spacing: 0.5,
               ) :
-            Icon(
-              Icons.signal_wifi_off,
-              size: 55,
-              color: Colors.redAccent,
-            ),
-            
+              Lottie.asset(
+                Constant.pathNoWifi,
+                width: 100,
+                height: 250
+              ),
           ),
         ),
         Expanded(

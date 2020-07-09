@@ -1,4 +1,3 @@
-import 'package:smartcaseflutter/utils/constant_color.dart';
 import 'package:flutter/material.dart';
 
 class EventCardHorizontal extends StatelessWidget {

@@ -7,6 +7,7 @@ import 'package:smartcaseflutter/utils/constant_color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:the_validator/the_validator.dart';
+import 'package:lottie/lottie.dart';
 
 
 class Login extends StatelessWidget {
@@ -27,10 +28,7 @@ class Login extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 0.0),
-                      child: Image.asset(Constant.pathLogoImage),
-                    ),
+                    _buildLogo(),
                     _buildEmailField(),
                     SizedBox(height: 20.0),
                     _buildPasswordField(),
@@ -46,11 +44,32 @@ class Login extends StatelessWidget {
     );
   }
 
+  Widget _buildLogo(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Lottie.asset(
+          Constant.pathLottie,
+            width: 100,
+            height: 250
+        ),
+        Text(
+          "BLUE\nSMART",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 30
+          )
+        )
+      ],
+    );
+  }
+
   Widget _buildEmailField() {
     return CustomTextField(
       keyboardType: TextInputType.emailAddress,
       controller: AuthController.to.emailController,
-      suffixIcon: Icon(Icons.email),
+      suffixIcon: Icon(Icons.email, color: ConstantColor.white,),
       hintText: 'Votre Email',
       validator: FieldValidator.email(message: "Adresse email incorrect"),
     );
@@ -60,7 +79,7 @@ class Login extends StatelessWidget {
     return CustomTextField(
       obscureText: true,
       controller: AuthController.to.passwordController,
-      suffixIcon: Icon(Icons.lock),
+      suffixIcon: Icon(Icons.lock,color: ConstantColor.white,),
       hintText: 'Mot de passe',
       validator: FieldValidator.password(
         minLength: 6,
@@ -94,7 +113,7 @@ class Login extends StatelessWidget {
             child: Text(
               "S'inscrire",
               style: TextStyle(
-                color: ConstantColor.primaryColor,
+                color: ConstantColor.white,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -29,15 +29,15 @@ class FeatureBtn extends StatelessWidget {
                 colors: [
                   /*  Color(0xff654C91),
               Color(0xff181A6E),*/
-                  Color(0xff1D4B69),
-                  Color(0xff10254c),
+                  Color(0xff6EC0FF),
+                  Color(0xff364369),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey[400],
+                  color: Colors.white,
                   blurRadius: 5,
                 )
               ]),

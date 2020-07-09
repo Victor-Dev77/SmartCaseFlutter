@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:smartcaseflutter/services/mqtt_client.dart';
-import 'package:wifi_connector/wifi_connector.dart';
 
 import '../controllers/auth_controller.dart';
 import 'card_settings.dart';

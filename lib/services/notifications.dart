@@ -1,8 +1,6 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:smartcaseflutter/controllers/mqtt_conttroller.dart';
-
 
 class NotificationService extends GetxController {
 
@@ -13,7 +11,7 @@ class NotificationService extends GetxController {
   bool boolNotif = true;
 
   initNotif() async {
-    var initSettingsAndroid = new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initSettingsAndroid = new AndroidInitializationSettings('notif_logo');
     var initSettingsIos = new IOSInitializationSettings();
     var initSettings = new InitializationSettings(initSettingsAndroid, initSettingsIos);
     await localNotif.initialize(initSettings, onSelectNotification: onSelectNotification);
@@ -25,6 +23,7 @@ class NotificationService extends GetxController {
     initNotif();
   }
     
+  // ignore: missing_return
   Future onSelectNotification(String payload) {
     print("Notif clicked : $payload");
   }
@@ -39,16 +38,16 @@ class NotificationService extends GetxController {
     if(value > 50 && boolNotif){
       await localNotif.show(
         0,
-        'PRUDENCE',
-        'Attention, vous perdez le réseau ou vous vous eloignez de votre valise !',
+        '‼️ PRUDENCE ‼️',
+        '🚈 Vous passez sûrement sous un tunnel, faites attention ! 🚈',
         platformChannelSpecifics,
       );
       boolNotif = false;
     } else if(value > 75 || value == 0){
       await localNotif.show(
         0,
-        'ATTENTION',
-        'Votre valise est hors de portée, revenez vite en arrière !',
+        '⛔️ ATTENTION ⛔️',
+        '🏃‍♂️Votre valise est hors de portée, revenez vite en arrière !! 🏃‍♂',
         platformChannelSpecifics,
       );
     } else if(value <= 35){

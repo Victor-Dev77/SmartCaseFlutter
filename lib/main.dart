@@ -19,11 +19,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'WeMoov',
+      title: 'BLUESMART',
       theme: ThemeData(
-        primaryColor: ConstantColor.primaryColor,
+        primaryColor: ConstantColor.primaryBlue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        scaffoldBackgroundColor: ConstantColor.white,
+        scaffoldBackgroundColor: ConstantColor.primaryBlue,
       ),
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.fade,

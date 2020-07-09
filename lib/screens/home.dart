@@ -1,8 +1,9 @@
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:smartcaseflutter/components/btn_test.dart';
 import 'package:flutter/material.dart';
 import 'package:smartcaseflutter/components/features.dart';
 import 'package:smartcaseflutter/components/last_info.dart';
+import 'package:smartcaseflutter/controllers/auth_controller.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -10,7 +11,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xff293251),
       body: SafeArea(
-        child: SingleChildScrollView(
+        //child: SingleChildScrollView(
           child: Container(
             width: Get.width,
             height: Get.height * 1.35,
@@ -29,17 +30,22 @@ class Home extends StatelessWidget {
                     child: LastInfo(),
                   ),
                   Expanded(
-                    flex: 3,
+                    flex: 4,
                     child: Features(),
                   ),
-                  Expanded(
-                    child: BtnTest(),
-                  )
                 ],
               ),
             ),
           ),
-        ),
+        //),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xff80BFFD),
+        onPressed: (){
+          AuthController.to.signOut();
+        },
+        child: Icon(FontAwesomeIcons.signOutAlt),
+
       ),
     );
   }
