@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:smartcaseflutter/components/weather_ui.dart';
 import 'package:smartcaseflutter/controllers/weather_controller.dart';

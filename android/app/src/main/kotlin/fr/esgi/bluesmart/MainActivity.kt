@@ -1,4 +1,4 @@
-package com.example.smartcaseflutter
+package fr.esgi.bluesmart
 
 import io.flutter.embedding.android.FlutterActivity
 

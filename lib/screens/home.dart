@@ -14,7 +14,7 @@ class Home extends StatelessWidget {
         //child: SingleChildScrollView(
           child: Container(
             width: Get.width,
-            height: Get.height * 1.35,
+            height: Get.height,
            /* decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [Color(0xff34393f), Color(0xff17181C)],
@@ -27,10 +27,11 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
+                    flex: 2,
                     child: LastInfo(),
                   ),
                   Expanded(
-                    flex: 4,
+                    flex: 6,
                     child: Features(),
                   ),
                 ],

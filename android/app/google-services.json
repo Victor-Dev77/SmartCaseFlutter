@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:44469445106:android:fa7a33fbb6acf8394f0b6b",
+        "mobilesdk_app_id": "1:44469445106:android:f7702e970ba751244f0b6b",
         "android_client_info": {
-          "package_name": "com.example.smartcaseflutter"
+          "package_name": "fr.esgi.bluesmart"
         }
       },
       "oauth_client": [

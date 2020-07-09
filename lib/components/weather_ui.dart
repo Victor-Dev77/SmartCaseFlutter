@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
 import 'package:smartcaseflutter/controllers/weather_controller.dart';
 import 'package:smartcaseflutter/models/weather/weather.dart';
 import 'package:smartcaseflutter/models/weather/weather_daily.dart';
+import 'package:smartcaseflutter/utils/constant_color.dart';
 
 class WeatherUI extends StatelessWidget {
   final Weather weather;
@@ -36,8 +38,18 @@ class WeatherUI extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 50, right: 30),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
+          GestureDetector(
+            child: Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: ConstantColor.white,
+              ),
+            ),
+            onTap: () => Get.back(),
+          ),
           GetBuilder<WeatherController>(
             builder: (controller) {
               if (!controller.searchOpen) return Container();

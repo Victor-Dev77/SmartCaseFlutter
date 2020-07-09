@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>44469445106-9g4rlolia58ucd6hnns45kruipioaqvq.apps.googleusercontent.com</string>
+	<string>44469445106-86kok45pvhc221i75cb9icdameem0c0c.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.44469445106-9g4rlolia58ucd6hnns45kruipioaqvq</string>
+	<string>com.googleusercontent.apps.44469445106-86kok45pvhc221i75cb9icdameem0c0c</string>
 	<key>API_KEY</key>
 	<string>AIzaSyBLToslwNuH7I_2iJwVmbGaHwBaVIGvnZI</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>fr.esgi.smartcaseflutter</string>
+	<string>fr.esgi.bluesmart</string>
 	<key>PROJECT_ID</key>
 	<string>smartcase-5752e</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:44469445106:ios:26fc3b4b20a2ee014f0b6b</string>
+	<string>1:44469445106:ios:80bef7cff1c00dba4f0b6b</string>
 	<key>DATABASE_URL</key>
 	<string>https://smartcase-5752e.firebaseio.com</string>
 </dict>

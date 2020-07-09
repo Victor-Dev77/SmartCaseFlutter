@@ -51,6 +51,22 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.4
+  flutter_rename_app: ^1.0.0
+
+
+flutter_rename_app:
+  application_name: BlueSmart
+  dart_package_name: smartcaseflutter
+  application_id: fr.esgi.bluesmart
+  bundle_id: fr.esgi.bluesmart
+  android_package_name: fr.esgi.bluesmart
+
+
+flutter_icons:
+  android: "launcher_icon" 
+  ios: true
+  image_path: "assets/icon.png" 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
