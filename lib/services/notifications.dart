@@ -12,7 +12,7 @@ class NotificationService extends GetxController {
   bool boolMort = true;
 
   initNotif() async {
-    var initSettingsAndroid = new AndroidInitializationSettings('notif_logo');
+    var initSettingsAndroid = new AndroidInitializationSettings('icon');
     var initSettingsIos = new IOSInitializationSettings();
     var initSettings = new InitializationSettings(initSettingsAndroid, initSettingsIos);
     await localNotif.initialize(initSettings, onSelectNotification: onSelectNotification);

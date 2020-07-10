@@ -8,7 +8,7 @@ import 'package:smartcaseflutter/controllers/mqtt_conttroller.dart';
 class MQTTService {
   static final String topicWifi = 'WIFI/#';
   static final String topicPoids = 'POIDS/pa';
-  static final String topicPoidsFlutter = 'POIDS/pa';
+  static final String topicPoidsFlutter = 'POIDS/pa/flutter';
 
   static final client = MqttServerClient.withPort(
       '0.tcp.ngrok.io', '5ae8f88e13c14cc1b990bcae08a71bc2', 15013);
