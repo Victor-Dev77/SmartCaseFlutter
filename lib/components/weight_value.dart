@@ -13,6 +13,7 @@ class WeightValue extends StatelessWidget {
     return Column(
       children: <Widget>[
         FloatingActionButton(
+          heroTag: UniqueKey(),
           onPressed: null,
           backgroundColor: isHigher ? Color(0xffDE9DBA) : Color(0xff80BFFD),
           child: Center(
