@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:smartcaseflutter/components/scanner_localisation.dart';
+import 'package:smartcaseflutter/controllers/poids_controller.dart';
 import 'package:smartcaseflutter/services/mqtt_client.dart';
 import 'package:smartcaseflutter/services/notifications.dart';
 
@@ -37,6 +38,7 @@ class MQTTController extends GetxController {
     } else {
       _poidValue.value = double.parse(payload);
     }
+    PoidsController.to.setPoids(_poidValue.value);
     //update(["poids"]);
   }
 
@@ -44,6 +46,7 @@ class MQTTController extends GetxController {
   void onInit() {
     super.onInit();
     MQTTService.connect();
+    Get.put(PoidsController());
     Get.put(NotificationService());
   }
 

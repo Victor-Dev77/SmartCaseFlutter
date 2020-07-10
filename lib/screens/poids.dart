@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:smartcaseflutter/components/poids_info.dart';
+import 'package:smartcaseflutter/controllers/poids_controller.dart';
 import 'package:smartcaseflutter/utils/constant_color.dart';
 
 class Poids extends StatelessWidget {
@@ -21,7 +22,7 @@ class Poids extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: 10),
             child: IconButton(
-              onPressed: () => print("refresh"),
+              onPressed: () => PoidsController.to.poidsRefresh(),
               icon: Icon(
                 Icons.refresh,
                 size: 30,

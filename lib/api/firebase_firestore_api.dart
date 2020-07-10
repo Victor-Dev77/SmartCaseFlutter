@@ -5,6 +5,7 @@ import 'package:smartcaseflutter/models/user.dart';
 class FirebaseFirestoreAPI {
   final CollectionReference _collectionUser = Firestore.instance.collection("users");
   final CollectionReference _collectionDestination = Firestore.instance.collection("destination");
+  final CollectionReference _collectionPoids = Firestore.instance.collection("poids");
 
   Future<User> getUser(String uid) async {
     try {
@@ -49,4 +50,25 @@ class FirebaseFirestoreAPI {
         .setData(destination);
   }
 
+  Future<List<double>> getListPoids(String idUser) async {
+    try {
+      var doc = await _collectionPoids.document(idUser).get();
+      List<double> _list = [];
+      if (doc.data != null) {
+        _list.add(doc.data["poids1"]);
+        _list.add(doc.data["poids2"]);
+      }
+      return _list;
+    } catch (_) {
+      print("ERROR: Firebase Firestore API: GetUser()");
+      return null;
+    }
+    return null;
+  }
+
+  setPoidsToCloud(String idUser, Map<String, dynamic> mapPoids)async {
+    await _collectionPoids
+        .document(idUser)
+        .setData(mapPoids, merge: true);
+  }
 }

@@ -25,4 +25,12 @@ class FirebaseFirestoreRepository {
     await _firestoreAPI.addDestination(idUser, destination);
   }
 
+  Future<List<double>> getListPoids(String idUser) async {
+    return await _firestoreAPI.getListPoids(idUser);
+  }
+
+  setPoidsToCloud(String idUser, Map<String, dynamic> mapPoids) async {
+    await _firestoreAPI.setPoidsToCloud(idUser, mapPoids);
+  }
+
 }

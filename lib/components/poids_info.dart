@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smartcaseflutter/components/weight_value.dart';
 import 'package:smartcaseflutter/controllers/mqtt_conttroller.dart';
+import 'package:smartcaseflutter/controllers/poids_controller.dart';
 import 'package:smartcaseflutter/services/mqtt_client.dart';
 import 'package:smartcaseflutter/utils/constant.dart';
 
@@ -19,10 +20,10 @@ class PoidsInfo extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Obx(
-            () => RichText(
+          GetBuilder<PoidsController>(
+            builder: (controller) => RichText(
               text: TextSpan(
-                text: "${MQTTController.to.poidValue}",
+                text: "${controller.difference}",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 50,
@@ -48,25 +49,33 @@ class PoidsInfo extends StatelessWidget {
       overflow: Overflow.visible,
       children: <Widget>[
         Align(
-          alignment: Alignment.center,
-          child: Container(
-              // color: Colors.red,
-              child: Transform.scale(
-            scale: 1.70,
-            child: Lottie.asset(
-              Constant.pathVibration,
-              height: 300,
-            ),
-          )),
-        ),
+            alignment: Alignment.center,
+            child: GetBuilder<PoidsController>(
+              builder: (controller) {
+                if(controller.isClicked){
+                  return Container(
+                      // color: Colors.red,
+                      child: Transform.scale(
+                    scale: 1.70,
+                    child: Lottie.asset(
+                      Constant.pathVibration,
+                      height: 300,
+                    ),
+                  ));
+                } else {
+                  return Container(
+                    height: 300,
+                  );
+                }
+              },
+            )),
         Positioned(
           top: 50,
           left: 1,
           right: 1,
           child: GestureDetector(
             onTap: () {
-              print("ok");
-              //MQTTService.publishPoidESP();
+              PoidsController.to.getPoidsFromESP();
             },
             child: Container(
               width: 200,
@@ -105,12 +114,16 @@ class PoidsInfo extends StatelessWidget {
   }
 
   Widget _buildLowerHigher() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        WeightValue(text: "47.5"),
-        WeightValue(text: "51.3", isHigher: true),
-      ],
+    return GetBuilder<PoidsController>(
+      builder: (controller) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            WeightValue(text: "${controller.listPoids[0]}"),
+            WeightValue(text: "${controller.listPoids[1]}", isHigher: true),
+          ],
+        );
+      },
     );
   }
 }
