@@ -8,6 +8,7 @@ import 'package:smartcaseflutter/controllers/mqtt_conttroller.dart';
 class MQTTService {
   static final String topicWifi = 'WIFI/#';
   static final String topicPoids = 'POIDS/pa';
+  static final String topicPoidsFlutter = 'POIDS/pa';
 
   static final client = MqttServerClient.withPort(
       '0.tcp.ngrok.io', '5ae8f88e13c14cc1b990bcae08a71bc2', 15013);
@@ -22,7 +23,7 @@ class MQTTService {
     client.onSubscribed = _onSubscribed;
 
     final connMess = MqttConnectMessage()
-        .withClientIdentifier('a041fdaa48d64d6694d93b469490733d')
+        .withClientIdentifier('5ae8f88e13c14cc1b990bcae08a71bc2')
         .keepAliveFor(5)
         .withWillTopic('WIFI/death')
         .withWillMessage('Je suis mort FLUTTER')
@@ -53,7 +54,7 @@ class MQTTService {
 
     client.updates.listen((List<MqttReceivedMessage<MqttMessage>> c) {
       final MqttPublishMessage recMess = c[0].payload;
-      if(c[0].topic == topicWifi){
+      if(c[0].topic == "WIFI/pa"){
         String _wifiValue =
             MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
 
@@ -66,8 +67,8 @@ class MQTTService {
             'EXAMPLE::Change notification:: topic is <${c[0].topic}>, payload is <-- $_wifiValue -->');
         print('');
         MQTTController.to.updateWifiSignal(_wifiValue);
-      }
-      String _poidValue =
+      } else {
+         String _poidValue =
             MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
 
         /// The above may seem a little convoluted for users only interested in the
@@ -79,7 +80,15 @@ class MQTTService {
             'EXAMPLE::Change notification:: topic is <${c[0].topic}>, payload is <-- $_poidValue -->');
         print('');
         MQTTController.to.updatePoids(_poidValue);
+      }
     });
+
+  }
+
+  static publishPoidESP(){
+    final builder = MqttClientPayloadBuilder();
+    builder.addString('ON');
+    client.publishMessage(topicPoidsFlutter, MqttQos.atMostOnce, builder.payload);
   }
 
   static _onSubscribed(String topic) {
