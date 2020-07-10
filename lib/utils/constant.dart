@@ -6,5 +6,6 @@ class Constant {
   //LOTTIE
   static final String pathLottie = "assets/blueSmart.json";
   static final String pathNoWifi = "assets/wifiLost.json";
+  static final String pathVibration = "assets/vibration.json";
 
 }

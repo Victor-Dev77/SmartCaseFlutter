@@ -17,23 +17,21 @@ class Poids extends StatelessWidget {
           color: ConstantColor.white,
           onPressed: () => Get.back(),
         ),
-      ),
-      body: SafeArea(
-        child: Container(
-          width: Get.width,
-          height: Get.height,
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Expanded(
-                    flex: 1,
-                    child: PoidsInfo(),
-                  ),
-                ],
+        actions: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: IconButton(
+              onPressed: () => print("refresh"),
+              icon: Icon(
+                Icons.refresh,
+                size: 30,
               ),
             ),
           ),
+        ],
+      ),
+      body: SafeArea(
+        child: PoidsInfo(),
       ),
     );
   }
