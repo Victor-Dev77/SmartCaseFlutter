@@ -3,7 +3,7 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 import 'package:smartcaseflutter/controllers/mqtt_conttroller.dart';
 
 // TAJ: 5ae8f88e13c14cc1b990bcae08a71bc2
-// VICTOR: a041fdaa48d64d6694d93b469490733d
+// VICTOR: 3cac05333f5441eaaa2ef43968fe3681
 
 class MQTTService {
   static final String topicWifi = 'WIFI/#';
@@ -11,7 +11,7 @@ class MQTTService {
   static final String topicPoidsFlutter = 'POIDS/pa/flutter';
 
   static final client = MqttServerClient.withPort(
-      '0.tcp.ngrok.io', 'a041fdaa48d64d6694d93b469490733d', 15013);
+      '2.tcp.ngrok.io', '3cac05333f5441eaaa2ef43968fe3681', 11225);
 
   static connect() async {
     client.logging(on: true);
@@ -23,7 +23,7 @@ class MQTTService {
     client.onSubscribed = _onSubscribed;
 
     final connMess = MqttConnectMessage()
-        .withClientIdentifier('a041fdaa48d64d6694d93b469490733d')
+        .withClientIdentifier('3cac05333f5441eaaa2ef43968fe3681')
         .keepAliveFor(5)
         .withWillTopic('WIFI/death')
         .withWillMessage('Je suis mort FLUTTER')

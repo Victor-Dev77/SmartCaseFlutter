@@ -1,3 +1,4 @@
+import 'package:smartcaseflutter/controllers/mqtt_conttroller.dart';
 import 'package:smartcaseflutter/screens/destination_page.dart';
 import 'package:smartcaseflutter/screens/home.dart';
 import 'package:smartcaseflutter/screens/localisation_suitcase.dart';
@@ -21,7 +22,7 @@ class Router {
 
   static final routes = [
     GetPage(name: splashRoute, page: () => SplashScreen()),
-    GetPage(name: homeRoute, page: () => Home()),
+    GetPage(name: homeRoute, page: () => Home(), binding: _HomeBinding()),
     GetPage(name: loginRoute, page: () => Login()),
     GetPage(name: signUpRoute, page: () => SignUp()),
     GetPage(name: destinationRoute, page: () => DestinationPage()),
@@ -29,4 +30,11 @@ class Router {
     GetPage(name: localisationRoute, page: () => LocalisationPage()),
     GetPage(name: poidsRoute, page: () => Poids()),
   ];
+}
+
+class _HomeBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(MQTTController());
+  }
 }
