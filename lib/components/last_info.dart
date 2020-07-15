@@ -26,12 +26,11 @@ class LastInfo extends StatelessWidget {
                         maxValue: 1,
                         levels: {
                           0: Colors.red,
-                          0.25: Colors.orange,
-                          0.40: Colors.yellow,
-                          0.60: Colors.green,
+                          0.46: Colors.orange,
+                          0.55: Colors.green,
                         },
                         size: 50,
-                        barCount: 4,
+                        barCount: 3,
                         spacing: 0.5,
                       )
                     : Lottie.asset(Constant.pathNoWifi,

@@ -41,9 +41,7 @@ class HeartPainter extends CustomPainter {
       return Colors.blueGrey;
     else if (intensity == 2)
       return Colors.orange;
-    else if (intensity == 3)
-      return Colors.yellow;
-    else if (intensity == 4 || intensity > 3) return Colors.red;
+    else if (intensity == 3) return Colors.red;
     return Colors.blueGrey;
   }
 

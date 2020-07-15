@@ -57,19 +57,15 @@ class MQTTController extends GetxController {
       _intensityLocalisation = 0;
       _textLocalisation = "Aucune connexion...";
     }
-    else if (_wifiValue.value < 40) {
-      _intensityLocalisation = 4;
-      _textLocalisation = "Valise très proche";
-    }
-    else if (_wifiValue.value >= 40 && _wifiValue.value < 60) {
+    else if (_wifiValue.value >= 1 && _wifiValue.value <= 45) {
       _intensityLocalisation = 3;
       _textLocalisation = "Valise proche";
     }
-    else if (_wifiValue.value >= 60 && _wifiValue.value < 75) {
+    else if (_wifiValue.value > 45 && _wifiValue.value <= 54) {
       _intensityLocalisation = 2;
       _textLocalisation = "Valise éloignée";
     }
-    else if (_wifiValue.value >= 75 && _wifiValue.value < 90) {
+    else if (_wifiValue.value > 55 && _wifiValue.value < 90) {
       _intensityLocalisation = 1;
       _textLocalisation = "Valise hors de portée";
     }
