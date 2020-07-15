@@ -26,9 +26,9 @@ class LastInfo extends StatelessWidget {
                         maxValue: 1,
                         levels: {
                           0: Colors.red,
-                          0.35: Colors.orange,
-                          0.50: Colors.yellow,
-                          0.70: Colors.green,
+                          0.25: Colors.orange,
+                          0.40: Colors.yellow,
+                          0.60: Colors.green,
                         },
                         size: 50,
                         barCount: 4,

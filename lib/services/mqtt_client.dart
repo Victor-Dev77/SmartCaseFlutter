@@ -11,7 +11,7 @@ class MQTTService {
   static final String topicPoidsFlutter = 'POIDS/pa/flutter';
 
   static final client = MqttServerClient.withPort(
-      '2.tcp.ngrok.io', '1fc240be65514e06b0f357fbcb7d2b90', 11225);
+      '0.tcp.ngrok.io', '1fc240be65514e06b0f357fbcb7d2b90', 17123);
 
   static connect() async {
     client.logging(on: true);
