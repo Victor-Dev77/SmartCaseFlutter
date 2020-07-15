@@ -53,7 +53,7 @@ class MQTTController extends GetxController {
   updateIntensity() {
     //int value = 10 + Random().nextInt(91); // 10 a 90
     //print(value);
-    if (_wifiValue.value == 0 || _wifiValue.value > 90) {
+    if (_wifiValue.value == 0 || _wifiValue.value >= 90) {
       _intensityLocalisation = 0;
       _textLocalisation = "Aucune connexion...";
     }

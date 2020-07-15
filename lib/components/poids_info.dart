@@ -40,6 +40,7 @@ class PoidsInfo extends StatelessWidget {
           _buildBtnGetPoids(),
           _buildLowerHigher(),
         ],
+        
       ),
     );
   }

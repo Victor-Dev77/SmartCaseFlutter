@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class WifiPainter extends StatelessWidget {
@@ -8,8 +10,8 @@ class WifiPainter extends StatelessWidget {
     Key key,
     this.style,
   }) : super(key: key);
-
-  WifiPainter.bars({
+  
+  WifiPainter.sector({
     Key key,
     @required num value,
     double size,
@@ -19,13 +21,12 @@ class WifiPainter extends StatelessWidget {
     Color activeColor,
     Color inactiveColor,
     Map<num, Color> levels,
-    Radius radius,
-    bool bevelled = false,
-    double spacing = 0.2,
+    bool rounded = false,
+    double spacing = 0.3,
     EdgeInsets margin = EdgeInsets.zero,
   }) : this(
           key: key,
-          style: BarWifiStyle(
+          style: SectorSignalStrengthIndicatorStyle(
             value: value,
             minValue: minValue,
             maxValue: maxValue,
@@ -34,8 +35,7 @@ class WifiPainter extends StatelessWidget {
             inactiveColor: inactiveColor,
             levels: levels,
             size: size,
-            radius: radius,
-            bevelled: bevelled,
+            rounded: rounded,
             spacing: spacing,
             margin: margin,
           ),
@@ -89,20 +89,17 @@ abstract class WifiStyle {
       '$value, $minValue, $maxValue, $size)';
 }
 
-
-class BarWifiStyle extends WifiStyle {
+class SectorSignalStrengthIndicatorStyle extends WifiStyle {
   final int barCount;
   final double spacing;
-  final Radius radius;
+  final bool rounded;
   final Map<num, Color> levels;
-  final bool bevelled;
 
-  const BarWifiStyle({
-    this.barCount = 3,
+  const SectorSignalStrengthIndicatorStyle({
+    this.barCount,
     this.spacing,
     this.levels,
-    this.bevelled,
-    Radius radius,
+    this.rounded,
     num value,
     num minValue,
     num maxValue,
@@ -110,8 +107,7 @@ class BarWifiStyle extends WifiStyle {
     Color inactiveColor,
     double size,
     EdgeInsets margin,
-  })  : radius = radius ?? Radius.zero,
-        super(
+  }) : super(
           value: value,
           minValue: minValue,
           maxValue: maxValue,
@@ -122,13 +118,13 @@ class BarWifiStyle extends WifiStyle {
         );
 
   @override
-  CustomPainter get painter => _BarSignalStrengthIndicatorPainter(this);
+  CustomPainter get painter => _SectorSignalStrengthIndicatorPainter(this);
 }
 
-class _BarSignalStrengthIndicatorPainter extends CustomPainter {
-  final BarWifiStyle style;
+class _SectorSignalStrengthIndicatorPainter extends CustomPainter {
+  final SectorSignalStrengthIndicatorStyle style;
 
-  const _BarSignalStrengthIndicatorPainter(this.style);
+  const _SectorSignalStrengthIndicatorPainter(this.style);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -136,9 +132,8 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
     final h = size.height;
 
     final barCount = style.barCount;
-    final barWidth = w / barCount;
-    final spacing = style.spacing * barWidth;
-    final barWidthTotal = barWidth - spacing * ((barCount - 1) / barCount);
+    final strokeWidth = h / barCount;
+    final spacing = style.spacing * strokeWidth;
 
     final value = normalizeValue(style.value, style.minValue, style.maxValue);
 
@@ -158,36 +153,72 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
 
     final keys = thresholds.keys.toList()..sort();
     final key = keys.lastWhere((t) => t < value, orElse: () => keys.first);
-    final Paint activeBarPaint = Paint()..color = thresholds[key];
-    final Paint inactiveBarPaint = Paint()..color = style.inactiveColor;
 
-    // draw bars
-    for (var i = 1; i <= barCount; i++) {
-      final barHeight = h * (i / barCount);
-      final left = (i - 1) * (barWidthTotal + spacing);
-      final top = h - barHeight;
+    final Paint activeBarPaint = Paint()
+      ..color = thresholds[key]
+      ..strokeWidth = strokeWidth - spacing
+      ..strokeCap = style.rounded ? StrokeCap.round : StrokeCap.butt
+      ..strokeJoin = StrokeJoin.round
+      ..style = PaintingStyle.stroke;
+
+    final Paint inactiveBarPaint = Paint()
+      ..color = style.inactiveColor
+      ..strokeWidth = strokeWidth - spacing
+      ..strokeCap = style.rounded ? StrokeCap.round : StrokeCap.butt
+      ..style = PaintingStyle.stroke;
+
+    final Paint activeFirstPaint = Paint()
+      ..color = thresholds[key]
+      ..strokeWidth = strokeWidth - spacing
+      ..style = PaintingStyle.fill;
+
+    final Paint inactiveFirstPaint = Paint()
+      ..color = style.inactiveColor
+      ..strokeWidth = strokeWidth - spacing
+      ..style = PaintingStyle.fill;
+
+    // draw segments
+    for (int i = 1; i <= barCount; i++) {
+      final offset = (barCount - i) * strokeWidth;
+      final radius = w - offset - (strokeWidth / 2);
 
       final paint = value > keys[i - 1] ? activeBarPaint : inactiveBarPaint;
+      final firstPaint =
+          value > keys[i - 1] ? activeFirstPaint : inactiveFirstPaint;
 
-      Path bar;
+      canvas.clipRect(Rect.fromLTWH(0, 0, w, h));
 
-      if (style.bevelled) {
-        final prevBarHeight = (i == 1) ? 0 : (h * ((i - 1) / barCount));
-        bar = Path()
-          ..moveTo(left, top + barHeight - prevBarHeight)
-          ..lineTo(left + barWidthTotal, top + (spacing * 0.75))
-          ..lineTo(left + barWidthTotal, top + barHeight)
-          ..lineTo(left, top + barHeight)
-          ..close();
+      if (i == 1) {
+        // draw first segment
+        if (style.rounded) {
+          final r = strokeWidth / pi * 1.3;
+          canvas.drawCircle(size.bottomLeft(Offset(r, -r)), r, firstPaint);
+        } else {
+          canvas.drawArc(
+            Rect.fromCircle(
+              center: size.bottomLeft(Offset.zero),
+              radius: strokeWidth - (spacing / 2),
+            ),
+            -90 * (pi / 180),
+            90 * (pi / 180),
+            true,
+            firstPaint,
+          );
+        }
       } else {
-        final rrect = RRect.fromRectAndRadius(
-          Rect.fromLTWH(left, top, barWidthTotal, barHeight),
-          style.radius,
+        // draw other segments
+        final offset = style.rounded ? strokeWidth / 2.0 : 0.0;
+        canvas.drawArc(
+          Rect.fromCircle(
+            center: size.bottomLeft(Offset(offset, -offset)),
+            radius: radius - offset,
+          ),
+          -90 * (pi / 180),
+          90 * (pi / 180),
+          false,
+          paint,
         );
-        bar = Path()..addRRect(rrect);
       }
-
-      canvas.drawPath(bar, paint);
     }
   }
 
@@ -195,7 +226,7 @@ class _BarSignalStrengthIndicatorPainter extends CustomPainter {
     (value - min) / (max - min);
 
   @override
-  bool shouldRepaint(_BarSignalStrengthIndicatorPainter oldDelegate) {
+  bool shouldRepaint(_SectorSignalStrengthIndicatorPainter oldDelegate) {
     return true;
   }
 }

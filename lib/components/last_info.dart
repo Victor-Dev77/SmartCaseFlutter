@@ -20,7 +20,7 @@ class LastInfo extends StatelessWidget {
         Expanded(
           child: Obx(() => Center(
                 child: MQTTController.to.wifiValue != 0
-                    ? WifiPainter.bars(
+                    ? WifiPainter.sector(
                         minValue: 0,
                         value: (100 - MQTTController.to.wifiValue) * 0.01,
                         maxValue: 1,

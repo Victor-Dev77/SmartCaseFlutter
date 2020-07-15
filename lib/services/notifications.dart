@@ -10,6 +10,7 @@ class NotificationService extends GetxController {
 
   bool boolNotif = true;
   bool boolMort = true;
+  bool boolConnexion = true;
 
   initNotif() async {
     var initSettingsAndroid = new AndroidInitializationSettings('icon');
@@ -36,7 +37,16 @@ class NotificationService extends GetxController {
     var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
     var platformChannelSpecifics = new NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    if(value > 50 && boolNotif){
+    if (value == 0 || value >= 90) {
+      await localNotif.show(
+        0,
+        '💀 MORT 💀',
+        '💀 Vous avez perdu la connexion vers la valise ! 💀',
+        platformChannelSpecifics,
+      );
+      boolConnexion = false;
+    }
+    else if(value > 54 && boolNotif){
       await localNotif.show(
         0,
         '‼️ PRUDENCE ‼️',
@@ -44,7 +54,7 @@ class NotificationService extends GetxController {
         platformChannelSpecifics,
       );
       boolNotif = false;
-    } else if(value > 75 || value == 0 && boolMort){
+    } else if((value > 58 || value == 0) && boolMort){
       await localNotif.show(
         0,
         '⛔️ ATTENTION ⛔️',
@@ -52,10 +62,13 @@ class NotificationService extends GetxController {
         platformChannelSpecifics,
       );
       boolMort = false;
-    } else if(value <= 35){
+    }
+    else if(value < 45){
       boolNotif = true;
-    } else if(value <=60){
+    } else if(value <= 48){
       boolMort = true;
+    } else if (value <= 75) {
+      boolConnexion = true;
     }
   }
 }

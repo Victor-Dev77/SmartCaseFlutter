@@ -54,7 +54,7 @@ class MQTTService {
 
     client.updates.listen((List<MqttReceivedMessage<MqttMessage>> c) {
       final MqttPublishMessage recMess = c[0].payload;
-      if(c[0].topic == "WIFI/pa"){
+      if(c[0].topic == "WIFI/pa" || c[0].topic == "WIFI/death"){
         String _wifiValue =
             MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
 
