@@ -46,7 +46,7 @@ class NotificationService extends GetxController {
       );
       boolConnexion = false;
     }
-    else if(value > 54 && boolNotif){
+    else if(value >= 52 && boolNotif){
       await localNotif.show(
         0,
         '‼️ PRUDENCE ‼️',
@@ -54,7 +54,7 @@ class NotificationService extends GetxController {
         platformChannelSpecifics,
       );
       boolNotif = false;
-    } else if((value > 58 || value == 0) && boolMort){
+    } else if((value > 64 || value == 0) && boolMort){
       await localNotif.show(
         0,
         '⛔️ ATTENTION ⛔️',
@@ -65,7 +65,7 @@ class NotificationService extends GetxController {
     }
     else if(value < 45){
       boolNotif = true;
-    } else if(value <= 48){
+    } else if(value <= 52){
       boolMort = true;
     } else if (value <= 75) {
       boolConnexion = true;
